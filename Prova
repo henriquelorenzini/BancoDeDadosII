@@ -19,3 +19,11 @@
     
 	INNER JOIN PEDIDOITEM pedidoItem 
 	WHERE pedidoItem.pedido_id = pedido.id;
+	
+8- SELECT MONTH(pedido.Data_Pedido) AS "Mês", cliente.Nome AS "Nome do cliente", 
+COUNT(*) AS "Quantidade de pedidos" 
+
+FROM CLIENTE cliente 
+
+INNER JOIN PEDIDO pedido WHERE PEDIDO.cliente_id = CLIENTE.id 
+GROUP BY cliente.id
