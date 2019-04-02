@@ -1,3 +1,20 @@
+2- SELECT * FROM PRODUTO
+ORDER BY NOME;
+
+3- SELECT * FROM VENDEDOR;
+
+4- SELECT * FROM VENDEDOR;
+
+5- SELECT
+	produto.id as "Codigo do produto",
+    produto.nome as "Nome do produto",
+    categoria.nome as "Nome da Categoria"
+    FROM 
+    PRODUTO produto,
+    CATEGORIA categoria
+    WHERE produto.categoria_id = categoria.id;
+
+
 6- SELECT 
     categoria.nome AS "Nome da categoria", 
     COUNT(*) AS "Quantidade de produtos" 
@@ -27,3 +44,16 @@ FROM CLIENTE cliente
 
 INNER JOIN PEDIDO pedido WHERE PEDIDO.cliente_id = CLIENTE.id 
 GROUP BY cliente.id
+
+9- SELECT MONTH(pedido.Data_Pedido) AS "Mês", 
+	VENDEDOR.Nome AS "Nome do vendedor", 
+	SUM(pedidoItem.valor_unitario * pedidoItem.quantidade) AS "Valor total de pedidos no mês" 
+	FROM VENDEDOR vendedor 
+	
+    INNER JOIN PEDIDO pedido 
+    ON PEDIDO.vendedor_id = vendedor.id 
+    
+	INNER JOIN PEDIDOITEM pedidoItem 
+    ON PEDIDOITEM.pedido_id = pedido.id
+    
+	GROUP BY vendedor.id;
