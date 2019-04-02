@@ -1,5 +1,56 @@
+1- use prova;
+
+CREATE TABLE CATEGORIA(
+	ID INT NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    PRIMARY KEY (ID)
+);
+
+    CREATE TABLE CLIENTE(
+		ID INT NOT NULL,
+		Nome VARCHAR(200) NOT NULL,
+		PRIMARY KEY (ID)
+	);
+
+	CREATE TABLE VENDEDOR(
+		ID INT NOT NULL,
+        Nome VARCHAR(200),
+        PRIMARY KEY (ID)
+	);
+
+CREATE TABLE PRODUTO(
+	ID INT NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Categoria_id INT NOT NULL,
+    FOREIGN KEY (Categoria_id) REFERENCES CATEGORIA (ID),
+    PRIMARY KEY (ID)
+    );
+    
+      CREATE TABLE PEDIDO(
+		ID INT NOT NULL,
+        Data_pedido DATETIME NOT NULL,
+        Vendedor_id INT NOT NULL,
+        FOREIGN KEY (Vendedor_id) REFERENCES VENDEDOR (ID),
+        Cliente_id INT NOT NULL,
+        FOREIGN KEY (Cliente_id) REFERENCES CLIENTE (ID),
+        PRIMARY KEY (ID)
+	);
+    
+CREATE TABLE PEDIDOITEM(
+	ID INT NOT NULL,
+    Produto_id INT NOT NULL,
+    FOREIGN KEY (Produto_id) REFERENCES PRODUTO (ID),
+    Pedido_id INT NOT NULL,
+    FOREIGN KEY (Pedido_id) REFERENCES PEDIDO (ID),
+    Quantidade FLOAT NOT NULL,
+	Valor_unitario DECIMAL NOT NULL,
+    PRIMARY KEY (ID)
+    );
+    
+    
+	
 2- SELECT * FROM PRODUTO
-ORDER BY NOME;
+	ORDER BY NOME;
 
 3- SELECT * FROM VENDEDOR;
 
@@ -57,3 +108,17 @@ GROUP BY cliente.id
     ON PEDIDOITEM.pedido_id = pedido.id
     
 	GROUP BY vendedor.id;
+	
+10-  SELECT produto.nome AS "Nome do produto", 
+    pedidoItem.quantidade AS "Quantidade" 
+    
+    FROM PEDIDOITEM pedidoItem
+    
+    INNER JOIN PRODUTO produto
+    ON PRODUTO.id = pedidoItem.produto_id
+    
+    INNER JOIN PEDIDO pedido
+    ON PEDIDO.id = pedidoItem.pedido_id 
+    
+    WHERE PEDIDO.Data_Pedido BETWEEN "2019-01-01 00:00:00" AND "2019-04-01 00:00:00"
+    GROUP BY PEDIDOITEM.quantidade DESC;
