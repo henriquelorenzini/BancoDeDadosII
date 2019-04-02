@@ -1,4 +1,12 @@
-SELECT 
+6- SELECT 
+    categoria.nome AS "Nome da categoria", 
+    COUNT(*) AS "Quantidade de produtos" 
+    FROM PRODUTO produto
+    INNER JOIN CATEGORIA categoria
+    WHERE CATEGORIA.id = PRODUTO.categoria_id 
+    GROUP BY produto.categoria_id;
+
+7 -SELECT 
 	pedido.Data_Pedido AS "Data do Pedido", vendedor.Nome AS "Nome do vendedor", 
 	cliente.Nome AS "Nome do cliente", 
 	(pedidoItem.valor_unitario * pedidoItem.quantidade) AS "Valor total do pedido"
