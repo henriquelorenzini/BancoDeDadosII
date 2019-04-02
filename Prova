@@ -1,0 +1,13 @@
+SELECT 
+	pedido.Data_Pedido AS "Data do Pedido", vendedor.Nome AS "Nome do vendedor", 
+	cliente.Nome AS "Nome do cliente", 
+	(pedidoItem.valor_unitario * pedidoItem.quantidade) AS "Valor total do pedido"
+ FROM PEDIDO pedido 
+	INNER JOIN VENDEDOR vendedor 
+	ON VENDEDOR.id = pedido.vendedor_id
+    
+	INNER JOIN CLIENTE cliente 
+	ON cliente.id = pedido.cliente_id 
+    
+	INNER JOIN PEDIDOITEM pedidoItem 
+	WHERE pedidoItem.pedido_id = pedido.id;
